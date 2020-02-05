@@ -9,7 +9,6 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/dilmerv/UnityPackageDependency.git",
-		"revision": "679387cb1fa822190b530bdbb8ea0945f508b5f6"
+		"url": "https://github.com/cobalt910/com.cobalt910.core.git"
 	}
 }
