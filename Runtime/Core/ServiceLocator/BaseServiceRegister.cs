@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using ProjectCore.Misc;
+using com.cobalt910.core.Runtime.Core.Misc;
 
-namespace ProjectCore.ServiceLocator
+namespace com.cobalt910.core.Runtime.Core.ServiceLocator
 {
     public abstract class BaseServiceRegister : CachedBehaviour
     {

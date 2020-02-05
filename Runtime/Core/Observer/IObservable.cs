@@ -1,4 +1,4 @@
-namespace ProjectCore.Observer
+namespace com.cobalt910.core.Runtime.Core.Observer
 {
     public interface IObservable
     {

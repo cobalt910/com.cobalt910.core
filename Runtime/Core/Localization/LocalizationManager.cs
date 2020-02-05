@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using com.cobalt910.core.Runtime.Core.Misc;
+using com.cobalt910.core.Runtime.Core.ServiceLocator;
 using NaughtyAttributes;
-using ProjectCore.Misc;
-using ProjectCore.ServiceLocator;
 using UnityEngine;
 
-namespace ProjectCore.Localization
+namespace com.cobalt910.core.Runtime.Core.Localization
 {
     public sealed class LocalizationManager : CachedBehaviour, IService
     {

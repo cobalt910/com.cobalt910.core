@@ -4,7 +4,7 @@ using JetBrains.Annotations;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace ProjectCore.Timer
+namespace com.cobalt910.core.Runtime.Core.Timer
 {
     /// <summary>
     /// Allows you to run events on a delay without the use of <see cref="Coroutine"/>s

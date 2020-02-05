@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace ProjectCore.PoolManager
+namespace com.cobalt910.core.Runtime.Core.PoolManager
 {
     public sealed class PoolQueue
     {

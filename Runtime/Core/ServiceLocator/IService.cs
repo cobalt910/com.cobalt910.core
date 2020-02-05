@@ -1,6 +1,6 @@
 using System;
 
-namespace ProjectCore.ServiceLocator
+namespace com.cobalt910.core.Runtime.Core.ServiceLocator
 {
     public interface IService
     {

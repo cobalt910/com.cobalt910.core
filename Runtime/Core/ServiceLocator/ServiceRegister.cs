@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using ProjectCore.Misc;
+using com.cobalt910.core.Runtime.Core.Misc;
 
-namespace ProjectCore.ServiceLocator
+namespace com.cobalt910.core.Runtime.Core.ServiceLocator
 {
     public sealed class ServiceRegister : CachedBehaviour
     {

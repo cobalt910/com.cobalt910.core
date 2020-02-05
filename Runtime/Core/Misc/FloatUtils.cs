@@ -1,4 +1,4 @@
-namespace ProjectCore.Misc
+namespace com.cobalt910.core.Runtime.Core.Misc
 {
     public static class FloatUtils
     {

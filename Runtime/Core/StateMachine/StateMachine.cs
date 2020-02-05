@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace ProjectCore.StateMachine
+namespace com.cobalt910.core.Runtime.Core.StateMachine
 {
     public class StateMachine
     {

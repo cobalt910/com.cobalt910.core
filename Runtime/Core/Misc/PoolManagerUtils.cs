@@ -1,7 +1,7 @@
-using ProjectCore.PoolManager;
+using com.cobalt910.core.Runtime.Core.PoolManager;
 using UnityEngine;
 
-namespace ProjectCore.Misc
+namespace com.cobalt910.core.Runtime.Core.Misc
 {
     public static class PoolManagerUtils
     {

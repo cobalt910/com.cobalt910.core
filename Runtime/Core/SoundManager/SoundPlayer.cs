@@ -1,8 +1,8 @@
-using ProjectCore.Misc;
-using ProjectCore.PoolManager;
+using com.cobalt910.core.Runtime.Core.Misc;
+using com.cobalt910.core.Runtime.Core.PoolManager;
 using UnityEngine;
 
-namespace ProjectCore.SoundManager
+namespace com.cobalt910.core.Runtime.Core.SoundManager
 {
     [RequireComponent(typeof(AudioSource))]
     public class SoundPlayer : CachedBehaviour, IPoolObject
@@ -108,7 +108,7 @@ namespace ProjectCore.SoundManager
         void IPoolObject.PostAwake(PoolObject poolObject)
         {
             _poolObject = poolObject;
-            _poolObject.LocalComponentLocator.Register(typeof(SoundPlayer), this);
+            _poolObject.objectLocator.Register(typeof(SoundPlayer), this);
 
             _audioSource.loop = false;
             _audioSource.playOnAwake = false;

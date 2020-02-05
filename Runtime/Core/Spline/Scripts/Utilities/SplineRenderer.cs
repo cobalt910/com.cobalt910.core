@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace ProjectCore.Spline.Scripts.Utilities
+namespace com.cobalt910.core.Runtime.Core.Spline.Scripts.Utilities
 {
     [ExecuteInEditMode]
     [RequireComponent (typeof (LineRenderer))]

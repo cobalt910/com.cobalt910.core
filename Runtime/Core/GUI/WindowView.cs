@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using ProjectCore.Localization;
-using ProjectCore.Misc;
+using com.cobalt910.core.Runtime.Core.Localization;
+using com.cobalt910.core.Runtime.Core.Misc;
 
-namespace ProjectCore.GUI
+namespace com.cobalt910.core.Runtime.Core.GUI
 {
     public abstract class WindowView : CachedBehaviour 
     {

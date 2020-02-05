@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace ProjectCore.Spline.Scripts.Spline
+namespace com.cobalt910.core.Runtime.Core.Spline.Scripts.Spline
 {
     public static class BezierCurves
     {

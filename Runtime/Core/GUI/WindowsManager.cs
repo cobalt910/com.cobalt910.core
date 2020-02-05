@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Net;
-using ProjectCore.Localization;
-using ProjectCore.Misc;
-using ProjectCore.ServiceLocator;
+using com.cobalt910.core.Runtime.Core.Localization;
+using com.cobalt910.core.Runtime.Core.Misc;
+using com.cobalt910.core.Runtime.Core.ServiceLocator;
 using UnityEngine;
 
-namespace ProjectCore.GUI
+namespace com.cobalt910.core.Runtime.Core.GUI
 {
     public sealed class WindowsManager : CachedBehaviour, IService
     {

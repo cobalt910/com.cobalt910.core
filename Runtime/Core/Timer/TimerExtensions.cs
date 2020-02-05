@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace ProjectCore.Timer
+namespace com.cobalt910.core.Runtime.Core.Timer
 {
     /// <summary>
     /// Contains extension methods related to <see cref="Timer"/>s.

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace ProjectCore.Observer
+namespace com.cobalt910.core.Runtime.Core.Observer
 {
     [Serializable]
     public abstract class Observable : IObservable

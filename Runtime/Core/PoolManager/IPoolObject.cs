@@ -1,4 +1,4 @@
-namespace ProjectCore.PoolManager
+namespace com.cobalt910.core.Runtime.Core.PoolManager
 {
     public interface IPoolObject
     {

@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Audio;
 
-namespace ProjectCore.SoundManager
+namespace com.cobalt910.core.Runtime.Core.SoundManager
 {
     [Serializable]
     public class SoundSettings

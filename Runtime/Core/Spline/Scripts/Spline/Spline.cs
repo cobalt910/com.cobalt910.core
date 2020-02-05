@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ProjectCore.Spline.Scripts.Spline
+namespace com.cobalt910.core.Runtime.Core.Spline.Scripts.Spline
 {
     public enum SplineDirection { Forward, Backwards }
 

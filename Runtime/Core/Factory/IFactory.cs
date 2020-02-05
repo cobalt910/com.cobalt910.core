@@ -1,6 +1,6 @@
-﻿using ProjectCore.ServiceLocator;
+﻿using com.cobalt910.core.Runtime.Core.ServiceLocator;
 
-namespace ProjectCore.Factory
+namespace com.cobalt910.core.Runtime.Core.Factory
 {
     public interface IFactory : IService
     {

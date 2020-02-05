@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using ProjectCore.Misc;
-using ProjectCore.ServiceLocator;
+using com.cobalt910.core.Runtime.Core.Misc;
+using com.cobalt910.core.Runtime.Core.ServiceLocator;
 using UnityEngine;
 
-namespace ProjectCore.PoolManager
+namespace com.cobalt910.core.Runtime.Core.PoolManager
 {
     public sealed class PoolManager : CachedBehaviour, IService
     {
         Type IService.ServiceType => typeof(PoolManager);
+        
         private readonly Dictionary<int, PoolQueue> _poolMap = new Dictionary<int, PoolQueue>();
 
         /// <summary>
@@ -20,6 +21,10 @@ namespace ProjectCore.PoolManager
         /// <exception cref="Exception">thrown exception if pool already exist.</exception>
         public void CreatePool(GameObject prefab, int startSize, int increaseSizeBy = 0)
         {
+            if (prefab.IsNull()) throw new ArgumentException($"Parameter {nameof(prefab)} cannot be null.");
+            if (startSize <= 0) throw new ArgumentException($"Parameter {nameof(startSize)} should be greater then zero.");
+            if (increaseSizeBy < 0) throw new ArgumentException($"Parameter {nameof(increaseSizeBy)} cannot be less then zero.");
+            
             var poolKey = prefab.GetInstanceID();
 
             if (_poolMap.ContainsKey(poolKey))
@@ -37,6 +42,8 @@ namespace ProjectCore.PoolManager
         /// <exception cref="Exception">thrown exception if pool not exist.</exception>
         public PoolObject InstantiateFromPool(GameObject prefab)
         {
+            if (prefab.IsNull()) throw new ArgumentException($"Parameter {nameof(prefab)} cannot be null.");
+
             var poolKey = prefab.GetInstanceID();
 
             if (!_poolMap.ContainsKey(poolKey))
@@ -47,6 +54,8 @@ namespace ProjectCore.PoolManager
 
         public void DisposePool(GameObject prefab, float timeToDestroyPool = 0)
         {
+            if (timeToDestroyPool < 0) throw new ArgumentException($"Parameter {timeToDestroyPool} cannot be less then zero.");
+            
             var poolKey = prefab.GetInstanceID();
 
             if (!_poolMap.ContainsKey(poolKey))

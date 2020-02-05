@@ -1,8 +1,8 @@
-﻿using ProjectCore.Spline.Scripts.Spline;
+﻿using com.cobalt910.core.Runtime.Core.Spline.Scripts.Spline;
 using UnityEditor;
 using UnityEngine;
 
-namespace ProjectCore.Spline.Editor
+namespace com.cobalt910.core.Runtime.Core.Spline.Editor
 {
     [CustomEditor(typeof(Scripts.Spline.Spline))]
     public class SplineEditor : UnityEditor.Editor

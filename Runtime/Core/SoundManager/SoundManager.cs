@@ -1,10 +1,10 @@
 ﻿using System;
-using ProjectCore.Misc;
-using ProjectCore.ServiceLocator;
+using com.cobalt910.core.Runtime.Core.Misc;
+using com.cobalt910.core.Runtime.Core.ServiceLocator;
 using UnityEditor;
 using UnityEngine;
 
-namespace ProjectCore.SoundManager
+namespace com.cobalt910.core.Runtime.Core.SoundManager
 {
     public class SoundManager : CachedBehaviour, IService
     {
@@ -25,7 +25,7 @@ namespace ProjectCore.SoundManager
         public SoundPlayer FromFactory()
         {
             var poolObject = _poolManager.InstantiateFromPool(_soundPlayerPrefab.gameObject);
-            return poolObject.LocalComponentLocator.Resolve<SoundPlayer>();
+            return poolObject.objectLocator.Resolve<SoundPlayer>();
         }
 
 #if UNITY_EDITOR

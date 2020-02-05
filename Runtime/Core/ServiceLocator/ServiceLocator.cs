@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using com.cobalt910.core.Runtime.Core.Misc;
 using NaughtyAttributes;
-using ProjectCore.Misc;
 using UnityEngine;
 
-namespace ProjectCore.ServiceLocator
+namespace com.cobalt910.core.Runtime.Core.ServiceLocator
 {
     [RequireComponent(typeof(ServiceRegister))]
     public sealed class ServiceLocator : CachedBehaviour

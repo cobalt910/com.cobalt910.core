@@ -1,8 +1,7 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace ProjectCore.PoolManager
+namespace com.cobalt910.core.Runtime.Core.PoolManager
 {
     [Serializable]
     public sealed class PoolObject
@@ -14,7 +13,7 @@ namespace ProjectCore.PoolManager
         public int InstanceId { get; }
         public IPoolObject[] PoolObjectScripts { get; }
         public bool IsInsidePool { get; private set; }
-        public LocalComponentLocator LocalComponentLocator { get; }
+        public ObjectLocator objectLocator { get; }
 
         public event Action OnDestroyed;
 
@@ -30,7 +29,7 @@ namespace ProjectCore.PoolManager
             foreach (var poolObjectScript in PoolObjectScripts)
                 poolObjectScript.PostAwake(this);
             
-            LocalComponentLocator = new LocalComponentLocator();
+            objectLocator = new ObjectLocator();
         }
         
         public void Initialize()

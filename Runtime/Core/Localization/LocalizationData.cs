@@ -1,7 +1,7 @@
 using System;
 using TMPro;
 
-namespace ProjectCore.Localization
+namespace com.cobalt910.core.Runtime.Core.Localization
 {
     [Serializable]
     public sealed class LocalizationData

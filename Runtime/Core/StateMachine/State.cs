@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using ProjectCore.Misc;
+using com.cobalt910.core.Runtime.Core.Misc;
 using UnityEngine;
 
-namespace ProjectCore.StateMachine
+namespace com.cobalt910.core.Runtime.Core.StateMachine
 {
     public abstract class State : MonoBehaviour
     {
