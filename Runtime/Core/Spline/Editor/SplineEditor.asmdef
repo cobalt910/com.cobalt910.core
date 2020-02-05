@@ -1,0 +1,17 @@
+{
+    "name": "SplineEditor",
+    "references": [
+        "GUID:7f04afc0306ed4f10a101a300bf29f4d"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
