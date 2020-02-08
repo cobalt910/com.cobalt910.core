@@ -1,12 +1,11 @@
 {
-	"name": "com.cobalt910.core",
-	"displayName": "cobalt910 Core Package",
-	"version": "1.0.2",
-	"unity": "2019.3",
-	"author": "Andriy Ivanilov",
-	"description": "Core package for new Unity projects.",
-	"dependencies": {
-	},
-	"repository": {
-	}
+  "name": "com.cobalt910.core",
+  "displayName": "cobalt910 Core Package",
+  "version": "1.1.0",
+  "unity": "2018.3",
+  "author": "Andriy Ivanilov",
+  "description": "Core package for new Unity projects.",
+  "dependencies": {
+    "com.unity.naughtyattributes": "https://github.com/cobalt910/NaughtyAttributes.git#2.0.1"
+  }
 }
