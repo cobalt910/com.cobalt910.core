@@ -8,7 +8,7 @@ For properly working:
     "dependencies": 
     {
         "com.coffee.git-dependency-resolver": "https://github.com/mob-sakai/GitDependencyResolverForUnity.git",
-        "com.unity.naughtyattributes": "https://github.com/cobalt910/NaughtyAttributes.git#2.0.1",
+        "com.cobalt910.core": "https://github.com/cobalt910/com.cobalt910.core.git",
         ...
     }
 }
