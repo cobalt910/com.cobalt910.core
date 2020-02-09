@@ -1,7 +1,7 @@
 {
   "name": "com.cobalt910.core",
   "displayName": "cobalt910 Core Package",
-  "version": "1.1.0",
+  "version": "1.1.0-preview.1",
   "unity": "2018.3",
   "author": "Andriy Ivanilov",
   "description": "Core package for new Unity projects.",
