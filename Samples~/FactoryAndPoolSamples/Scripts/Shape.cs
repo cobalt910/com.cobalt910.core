@@ -15,7 +15,7 @@ namespace com.cobalt910.core.Samples.FactoryAndPoolSamples.Scripts
         #region IPoolObject implementation
         void IPoolObject.PostAwake(PoolObject poolObject)
         {
-            poolObject.ObjectLocator.Register(typeof(Shape), this);
+            poolObject.ObjectLocator.Register(this);
         }
 
         void IPoolObject.OnReuseObject(PoolObject poolObject)

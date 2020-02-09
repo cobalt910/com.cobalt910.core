@@ -9,8 +9,10 @@ namespace com.cobalt910.core.Runtime.PoolManager
     {
         private readonly Dictionary<Type, List<object>> _objectsMap = new Dictionary<Type, List<object>>();
 
-        public void Register(Type saveType, object objectToSave)
+        public void Register<T>(T objectToSave) where T : class
         {
+            var saveType = typeof(T);
+            
             if (_objectsMap.TryGetValue(saveType, out var components)) components.Add(objectToSave);
             else _objectsMap.Add(saveType, new List<object> {objectToSave});
         }

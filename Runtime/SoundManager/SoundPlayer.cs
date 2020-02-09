@@ -109,8 +109,8 @@ namespace com.cobalt910.core.Runtime.SoundManager
         void IPoolObject.PostAwake(PoolObject poolObject)
         {
             _poolObject = poolObject;
-            _poolObject.ObjectLocator.Register(typeof(SoundPlayer), this);
-
+            _poolObject.ObjectLocator.Register(this);
+            
             _audioSource.loop = false;
             _audioSource.playOnAwake = false;
             _audioSource.Stop();
