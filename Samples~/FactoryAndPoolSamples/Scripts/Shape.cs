@@ -20,11 +20,16 @@ namespace com.cobalt910.core.Samples.FactoryAndPoolSamples.Scripts
 
         void IPoolObject.OnReuseObject(PoolObject poolObject)
         {
-            Timer.Register(3f, poolObject.Destroy);
+            var timeToDestroy = 3f;
+            Timer.Register(timeToDestroy, poolObject.Destroy, f =>
+            {
+                Transform.Value.localScale = Vector3.one * (1 - f / timeToDestroy);
+            });
         }
 
         void IPoolObject.OnDisposeObject(PoolObject poolObject)
         {
+            Transform.Value.localScale = Vector3.one;
             _rigidbody.velocity = Vector3.zero;
             _rigidbody.angularVelocity = Vector3.zero;
         }

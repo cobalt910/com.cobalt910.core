@@ -4,6 +4,8 @@ using com.cobalt910.core.Runtime.Extension;
 using com.cobalt910.core.Runtime.Localization;
 using com.cobalt910.core.Runtime.Misc;
 using com.cobalt910.core.Runtime.ServiceLocator;
+using NaughtyAttributes;
+using UnityEditor;
 using UnityEngine;
 
 namespace com.cobalt910.core.Runtime.GUI
@@ -13,7 +15,7 @@ namespace com.cobalt910.core.Runtime.GUI
         Type IService.ServiceType { get; } = typeof(WindowsManager);
         public IWindowController OpenedWindow { get; private set; }
 
-        [SerializeField] private WindowView[] _views;
+        [SerializeField, ReorderableList] private WindowView[] _windows;
         
         private readonly Dictionary<int, WindowView> _windowsMap = new Dictionary<int, WindowView>();
         private LocalizationManager _localizationManager;
@@ -22,18 +24,18 @@ namespace com.cobalt910.core.Runtime.GUI
         {
             _localizationManager = ServiceLocator.ServiceLocator.Resolve<LocalizationManager>();
             
-            foreach (var view in _views)
+            foreach (var view in _windows)
             {
                 _windowsMap.Add(view.WindowId, view);
                 view.gameObject.SetActive(false);
             }
 
-            _views = null;
+            _windows = null;
 
             _localizationManager.OnLanguageShanged += LanguageChanged;
         }
 
-        public void RequestShowPopup(IWindowController controller)
+        public void RequestShowWindow(IWindowController controller)
         {
             if (OpenedWindow != null && !OpenedWindow.View.IsOpened)
             {
@@ -60,5 +62,14 @@ namespace com.cobalt910.core.Runtime.GUI
             if (OpenedWindow != null && OpenedWindow.View != null && OpenedWindow.View.IsOpened)
                 OpenedWindow.View.UpdateLanguage(_localizationManager);
         }
+        
+#if UNITY_EDITOR
+        [Button("Collect All Windows")]
+        private void CollectAllWindows()
+        {
+            _windows = GetComponentsInChildren<WindowView>(true);
+            EditorUtility.SetDirty(this);
+        }
+#endif
     }
 }

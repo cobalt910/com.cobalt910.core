@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -30,13 +31,13 @@ namespace com.cobalt910.core.Runtime.PoolManager
             var poolObject = _poolObjects.Dequeue();
             _poolObjects.Enqueue(poolObject);
 
-            if (poolObject.GameObject.activeSelf && !FlexibleSize) poolObject.Destroy();
-            else if (poolObject.GameObject.activeSelf && FlexibleSize)
+            if (!poolObject.IsInsidePool && !FlexibleSize) poolObject.Destroy();
+            else if (!poolObject.IsInsidePool && FlexibleSize)
             {
                 poolObject = CreatePoolObject(_prefab);
                 _poolObjects.Enqueue(poolObject);
 
-                for (int i = 0; i < _increaseSizeBy - 1; i++)
+                for (var i = 0; i < _increaseSizeBy - 1; i++)
                     _poolObjects.Enqueue(CreatePoolObject(_prefab));
             }
 
@@ -48,8 +49,9 @@ namespace com.cobalt910.core.Runtime.PoolManager
         public void DisposePool(float timeToDestroyPool)
         {
             if (_poolObjects.Count == 0) return;
+            if (timeToDestroyPool < 0f) throw new ArgumentException($"Argument {nameof(timeToDestroyPool)} should be greater then zero.");
 
-            if (System.Math.Abs(timeToDestroyPool) < 0.0001f)
+            if (Mathf.Abs(timeToDestroyPool) < 0.0001f)
             {
                 while (_poolObjects.Count != 0)
                     Object.Destroy(_poolObjects.Dequeue().GameObject);

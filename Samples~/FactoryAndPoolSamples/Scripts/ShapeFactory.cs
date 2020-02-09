@@ -24,7 +24,7 @@ namespace com.cobalt910.core.Samples.FactoryAndPoolSamples.Scripts
             _shapePrefabs.ForEach(x =>
             {
                 _shapePrefabsMap.Add(x.ShapeType, x.gameObject);
-                _poolManager.CreatePool(x.gameObject, 10);
+                _poolManager.CreatePool(x.gameObject, 5, 1);
             });
         }
 
