@@ -8,26 +8,27 @@ namespace com.cobalt910.core.Runtime.PoolManager
     {
         public Transform Transform { get; }
         public GameObject GameObject { get; }
-        public Transform Parent { get; }
+        public Transform PoolParent { get; }
 
         public int InstanceId { get; }
-        public IPoolObject[] PoolObjectScripts { get; }
         public bool IsInsidePool { get; private set; }
         public ObjectLocator ObjectLocator { get; }
 
         public event Action OnDestroyed;
 
-        public PoolObject(GameObject instance, Transform parent)
+        private IPoolObject[] _poolObjectScripts;
+
+        public PoolObject(GameObject instance, Transform poolParent)
         {
             GameObject = instance;
             InstanceId = instance.GetInstanceID();
             Transform = instance.transform;
-            PoolObjectScripts = instance.GetComponentsInChildren<IPoolObject>(true);
+            _poolObjectScripts = instance.GetComponentsInChildren<IPoolObject>(true);
 
-            Parent = parent;
+            PoolParent = poolParent;
             ObjectLocator = new ObjectLocator();
             
-            foreach (var poolObjectScript in PoolObjectScripts)
+            foreach (var poolObjectScript in _poolObjectScripts)
                 poolObjectScript.PostAwake(this);
         }
         
@@ -36,7 +37,7 @@ namespace com.cobalt910.core.Runtime.PoolManager
             GameObject.SetActive(true);
             IsInsidePool = false;
             
-            foreach (var iPoolObject in PoolObjectScripts)
+            foreach (var iPoolObject in _poolObjectScripts)
                 iPoolObject.OnReuseObject(this);
         }
 
@@ -48,10 +49,10 @@ namespace com.cobalt910.core.Runtime.PoolManager
             GameObject.SetActive(false);
             Transform.position = Vector3.zero;
             Transform.rotation = Quaternion.identity;
-            Transform.parent = Parent;
+            Transform.parent = PoolParent;
             IsInsidePool = true;
 
-            foreach (var poolObjectScript in PoolObjectScripts)
+            foreach (var poolObjectScript in _poolObjectScripts)
                 poolObjectScript.OnDisposeObject(this);
             
             OnDestroyed?.Invoke();

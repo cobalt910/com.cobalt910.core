@@ -9,9 +9,9 @@ namespace com.cobalt910.core.Runtime.PoolManager
     {
         private readonly Dictionary<Type, List<object>> _objectsMap = new Dictionary<Type, List<object>>();
 
-        public void Register<T>(T objectToSave) where T : class
+        public void Register<TSave>(TSave objectToSave) where TSave : class
         {
-            var saveType = typeof(T);
+            var saveType = typeof(TSave);
             
             if (_objectsMap.TryGetValue(saveType, out var components)) components.Add(objectToSave);
             else _objectsMap.Add(saveType, new List<object> {objectToSave});
@@ -41,7 +41,7 @@ namespace com.cobalt910.core.Runtime.PoolManager
             return false;
         }
 
-        public bool TryResolveMany<TSave>(out List<TSave> instances) 
+        public bool TryResolveMany<TSave>(out List<TSave> instances)  where TSave : class
         {
             var saveType = typeof(TSave);
 
@@ -53,6 +53,29 @@ namespace com.cobalt910.core.Runtime.PoolManager
 
             instances = null;
             return false;
+        }
+
+        public void Forget<TSave>() where TSave : class
+        {
+            var saveType = typeof(TSave);
+
+            if (_objectsMap.ContainsKey(saveType))
+            {
+                var list = _objectsMap[saveType];
+                if (list.Count > 0) list.RemoveAt(0);
+            }
+        }
+
+        public void ForgetAll<TSave>() where TSave : class
+        {
+            var saveType = typeof(TSave);
+            if (_objectsMap.ContainsKey(saveType))
+                _objectsMap.Remove(saveType);
+        }
+
+        public void Clear()
+        {
+            _objectsMap.Clear();
         }
     }
 }
