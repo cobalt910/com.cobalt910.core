@@ -1,0 +1,15 @@
+{
+    "name": "FactoryAndPoolSamples",
+    "references": [
+        "GUID:76e17c6c126fb4f1b8d0371cd921e107"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

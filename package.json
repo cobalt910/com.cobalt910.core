@@ -7,5 +7,12 @@
   "description": "Core package for new Unity projects.",
   "dependencies": {
     "com.unity.naughtyattributes": "https://github.com/cobalt910/NaughtyAttributes.git#2.0.1"
-  }
+  },
+  "samples": [
+    {
+      "displayName": "Factory And Pool",
+      "description": "Sample scene showing how to use factories and pool manager.",
+      "path": "Samples~/FactoryAndPoolSamples"
+    }
+  ]
 }
