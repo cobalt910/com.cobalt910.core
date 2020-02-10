@@ -20,3 +20,9 @@ For properly working:
 - Restart Unity.
 - After restarting unity display warning message, just ignore it and press **continue** button.
 ![Image description](https://image.prntscr.com/image/MX0fxBPBQhye6kjBg7fgwA.png)
+
+***
+## Usage samples.
+- [Service Locator](https://github.com/cobalt910/com.cobalt910.core/tree/master/Runtime/ServiceLocator)
+- [Pool Manager](https://github.com/cobalt910/com.cobalt910.core/tree/master/Runtime/PoolManager)
+> Docs for other plugins comming soon!
