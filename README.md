@@ -25,4 +25,5 @@ For properly working:
 ## Usage samples.
 - [Service Locator](https://github.com/cobalt910/com.cobalt910.core/tree/master/Runtime/ServiceLocator)
 - [Pool Manager](https://github.com/cobalt910/com.cobalt910.core/tree/master/Runtime/PoolManager)
+- [Factories](https://github.com/cobalt910/com.cobalt910.core/tree/master/Runtime/Factory)
 > Docs for other plugins comming soon!

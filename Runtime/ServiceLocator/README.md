@@ -1,6 +1,6 @@
 ## ServiceLocator Usage Sample
 
-> ## Services
+> ## Global Services
 * Creating services.
 
 If you want to implement your own service you need to create class and implement ```IService``` interface.
@@ -31,43 +31,25 @@ public void Awake()
 }
 ```
 
-> ## Factories
+> ## Local Services
 
-Factories also registered in ```ServiceLocator```
+* Creating services is the same like in ```Global```.
 
-* Creating factory.
+* Object or prefab setup.
+
+You need to add on object ```LocalServiceLocator``` component and all your services.
+<p align="center">
+  <img width="510" height="524" src="https://image.prntscr.com/image/ZZ0x3rDvRBam6DXhTrDP9w.png">
+</p>
+
+After this, and after changing your child hierarchy you should press "Re-Bake Child Id's" button in ```LocalServiceLocator``` component. This additional step made for optimization.
+
+* Get manager or service in local context.
 ```csharp
-public class EmptyObjectCreationArgs
+public void Awake()
 {
-  public readonly Vector3 Position;  
-  
-  public EmptyObjectCreationArgs(Vector3 position)
-  {
-    Position = position;
-  }
-}
-
-public class EmptyObjectFactory : IFactory<GameObject, EmptyObjectCreationArgs>
-{
-  IService.Type ServiceType => typeof(IFactory<GameObject, EmptyObjectCreationArgs>);
-
-  public GameObject Create(EmptyObjectCreationArgs args)
-  {
-    var emptyObjectInstance = new GameObject("Empty");
-    emptyObjectInstance.transform.position = args.Position;
-    return emptyObjectInstance;
-  }
+  var manager = ServiceLocator.Resolve<YourManager>(gameObject); // add additional parameter, gameObject
 }
 ```
 
-* Using factory
-```csharp
-private IFactory<GameObject, EmptyObjectCreationArgs> _emptyObjectFactory;
-
-private void Awake()
-{
-  _emptyObjectFactory = ServiceLocator.Resolve<IFactory<GameObject, EmptyObjectCreationArgs>>();
-  _emptyObjectFactory.Create(new EmptyObjectCreationArgs(Random.insideUnitSphere));
-}
-```
-For best performance, it is better to use factories in conjunction with the ```PoolManager```
+At this stage local services support only one depth level resolving.
