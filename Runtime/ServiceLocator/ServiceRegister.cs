@@ -4,34 +4,41 @@ using com.cobalt910.core.Runtime.Misc;
 
 namespace com.cobalt910.core.Runtime.ServiceLocator
 {
-    public sealed class ServiceRegister : CachedBehaviour
+    public class ServiceRegister : CachedBehaviour
     {
         public bool IncludeInactive = true;
-        public SearchType ServiceSearchType;
-        public enum SearchType
+
+        public SearchStrategy ServiceSearchStrategy = SearchStrategy.InDepthHierarchy;
+        
+        public enum SearchStrategy
         {
-            InDepthHierarchy,
             WholeObject,
+            InDepthHierarchy,
             FirstEntry
         }
 
         private void Awake()
         {
             List<IService> findServices = null;
-            switch (ServiceSearchType)
+            switch (ServiceSearchStrategy)
             {
-                case SearchType.WholeObject:
+                case SearchStrategy.WholeObject:
                     findServices = new List<IService>(GetComponents<IService>());
                     break;
-                case SearchType.InDepthHierarchy:
+                case SearchStrategy.InDepthHierarchy:
                     findServices = new List<IService>(GetComponentsInChildren<IService>(IncludeInactive));
                     break;
-                case SearchType.FirstEntry:
+                case SearchStrategy.FirstEntry:
                     findServices = new List<IService> {GetComponent<IService>()};
                     break;
             }
 
-            findServices?.Where(x => x != null).ToList().ForEach(ServiceLocator.Register);
+            RegisterServices(findServices);
+        }
+
+        protected virtual void RegisterServices(List<IService> services)
+        {
+            services.ForEach(ServiceLocator.Register);
         }
     }
 }

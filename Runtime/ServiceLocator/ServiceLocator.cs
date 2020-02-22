@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using com.cobalt910.core.Runtime.Extension;
 using com.cobalt910.core.Runtime.Misc;
+using com.cobalt910.core.Runtime.ServiceLocator.Local;
 using NaughtyAttributes;
 using UnityEngine;
 
@@ -12,8 +14,10 @@ namespace com.cobalt910.core.Runtime.ServiceLocator
     {
         [ReorderableList]
         public List<ScriptableObject> ScriptableServices = new List<ScriptableObject>();
-        private static readonly Dictionary<Type, IService> ServiceMap = new Dictionary<Type, IService>();
-
+       
+        private static readonly Dictionary<Type, IService> _serviceMap = new Dictionary<Type, IService>();
+        private static readonly Dictionary<int, LocalServiceLocator> _localServiceLocators = new Dictionary<int, LocalServiceLocator>();
+        
         private void Awake()
         {
             // ReSharper disable once SuspiciousTypeConversion.Global
@@ -27,25 +31,49 @@ namespace com.cobalt910.core.Runtime.ServiceLocator
 
         public static void Register(IService service)
         {
-            if (ServiceMap.ContainsKey(service.ServiceType))
+            if (_serviceMap.ContainsKey(service.ServiceType))
                 throw new Exception($"[ServiceLocator] Service {service.ServiceType.Name} already registered.");
 
-            ServiceMap.Add(service.ServiceType, service);
+            _serviceMap.Add(service.ServiceType, service);
         }
 
-        public static TRegister Resolve<TRegister>() where TRegister : class
+        public static TRegister Resolve<TRegister>(GameObject localContext = null) where TRegister : class
         {
+            if (localContext.IsNotNull()) return ResolveLocal<TRegister>(localContext);
+            
             var serviceType = typeof(TRegister);
 
-            if (ServiceMap.ContainsKey(serviceType)) return (TRegister) ServiceMap[serviceType];
+            if (_serviceMap.ContainsKey(serviceType)) return (TRegister) _serviceMap[serviceType];
             throw new Exception($"[ServiceLocator] Service {serviceType.FullName} was not being register.");
+        }
+
+        private static TRegister ResolveLocal<TRegister>(GameObject sendRequestFrom) where TRegister : class
+        {
+            if(sendRequestFrom.IsNull())
+                throw new ArgumentNullException(nameof(sendRequestFrom), "Parameter should not be equal to null.");
+            
+            var concreteLocator = _localServiceLocators.Values.FirstOrDefault(localServiceLocator => localServiceLocator.Contains(sendRequestFrom));
+            if (concreteLocator.IsNotNull()) return concreteLocator.Resolve<TRegister>();
+            
+            throw new Exception("[ServiceLocator] Local service locator with requested parameters not found.");
         }
 
         private void OnDestroy()
         {
-            ServiceMap.Clear();
+            _serviceMap.Clear();
         }
-        
+
+        internal static void AddLocalServiceLocator(LocalServiceLocator localServiceLocator)
+        {
+            // todo: checks and debugs
+            _localServiceLocators.Add(localServiceLocator.InstanceId, localServiceLocator);
+        }
+
+        internal static void RemoveLocalServiceLocator(LocalServiceLocator localServiceLocator)
+        {
+            // todo: checks and debugs
+            _localServiceLocators.Remove(localServiceLocator.InstanceId);
+        }
 
 #if UNITY_EDITOR
         private void OnValidate()
