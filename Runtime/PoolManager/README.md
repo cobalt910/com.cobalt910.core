@@ -2,6 +2,7 @@
 
 **Pool Manager work only with ServiceLocator.**
 
+> Pool Manager
 * Get instance of PoolManager
 ```csharp
 private PoolManager _poolManager;
