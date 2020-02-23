@@ -1,4 +1,5 @@
-﻿using com.cobalt910.core.Runtime.Spline.Scripts.Spline;
+﻿#if UNITY_EDITOR
+using com.cobalt910.core.Runtime.Spline.Scripts.Spline;
 using UnityEditor;
 using UnityEngine;
 
@@ -109,3 +110,4 @@ namespace com.cobalt910.core.Runtime.Spline.Editor
         }
     }
 }
+#endif

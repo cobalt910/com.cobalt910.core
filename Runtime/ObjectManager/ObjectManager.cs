@@ -52,6 +52,11 @@ namespace com.cobalt910.core.Runtime.ObjectManager
             return objectData.ObjectIdentifier.FamilyId;
         }
 
+        public bool IsInFamily<T>(int objectId, T familyEnum) where T : struct, Enum
+        {
+            return GetFamily(objectId) == (int) Enum.Parse(typeof(T), familyEnum.ToString());
+        }
+
         public void GetAllObjectsFromFamily(int familyId, out List<ObjectLocator> components)
         {
             components = _objectsMap
