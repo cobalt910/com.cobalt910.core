@@ -16,7 +16,7 @@ namespace com.cobalt910.core.Runtime.PoolManager
 
         public event Action OnDestroyed;
 
-        private IPoolObject[] _poolObjectScripts;
+        private readonly IPoolObject[] _poolObjectScripts;
 
         public PoolObject(GameObject instance, Transform poolParent)
         {
@@ -44,7 +44,7 @@ namespace com.cobalt910.core.Runtime.PoolManager
         /// <summary>
         /// Return object back into pool.
         /// </summary>
-        public void Destroy() // todo: not safety, should cleanup fields and save copy of object
+        public void Destroy() 
         {
             GameObject.SetActive(false);
             Transform.position = Vector3.zero;

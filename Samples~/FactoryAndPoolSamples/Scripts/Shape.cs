@@ -11,7 +11,7 @@ namespace com.cobalt910.core.Samples.FactoryAndPoolSamples.Scripts
         [SerializeField] private Rigidbody _rigidbody;
 
         public Rigidbody Rigidbody => _rigidbody;
-
+        
         #region IPoolObject implementation
         void IPoolObject.PostAwake(PoolObject poolObject)
         {

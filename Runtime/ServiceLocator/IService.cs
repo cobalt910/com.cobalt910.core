@@ -6,4 +6,7 @@ namespace com.cobalt910.core.Runtime.ServiceLocator
     {
         Type ServiceType { get; }
     }
+
+    public interface IMonoService : IService { }
+    public interface IFactoryService : IService { }
 }

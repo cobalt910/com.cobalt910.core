@@ -3,10 +3,11 @@ using com.cobalt910.core.Runtime.Misc;
 using com.cobalt910.core.Runtime.ServiceLocator;
 using UnityEditor;
 using UnityEngine;
+using Zenject;
 
 namespace com.cobalt910.core.Runtime.SoundManager
 {
-    public class SoundManager : CachedBehaviour, IService
+    public class SoundManager : CachedBehaviour, IMonoService
     {
         Type IService.ServiceType { get; } = typeof(SoundManager);
         [SerializeField] private SoundPlayer _soundPlayerPrefab;
@@ -14,11 +15,10 @@ namespace com.cobalt910.core.Runtime.SoundManager
         private const int InitialPoolSize = 20;
         private const int IncreasePoolBy = 20;
 
-        private PoolManager.PoolManager _poolManager;
-        
+        [Inject] private PoolManager.PoolManager _poolManager;
+
         private void Awake()
         {
-            _poolManager = ServiceLocator.ServiceLocator.Resolve<PoolManager.PoolManager>();
             _poolManager.CreatePool(_soundPlayerPrefab.gameObject, InitialPoolSize, IncreasePoolBy);
         }
 

@@ -7,10 +7,11 @@ using com.cobalt910.core.Runtime.ServiceLocator;
 using NaughtyAttributes;
 using UnityEditor;
 using UnityEngine;
+using Zenject;
 
 namespace com.cobalt910.core.Runtime.GUI
 {
-    public sealed class WindowsManager : CachedBehaviour, IService
+    public sealed class WindowsManager : CachedBehaviour, IMonoService
     {
         Type IService.ServiceType { get; } = typeof(WindowsManager);
         public IWindowController OpenedWindow { get; private set; }
@@ -18,12 +19,10 @@ namespace com.cobalt910.core.Runtime.GUI
         [SerializeField, ReorderableList] private WindowView[] _windows;
         
         private readonly Dictionary<int, WindowView> _windowsMap = new Dictionary<int, WindowView>();
-        private LocalizationManager _localizationManager;
+        [Inject] private LocalizationManager _localizationManager;
 
         private void Awake()
         {
-            _localizationManager = ServiceLocator.ServiceLocator.Resolve<LocalizationManager>();
-            
             foreach (var view in _windows)
             {
                 _windowsMap.Add(view.WindowId, view);
@@ -37,7 +36,7 @@ namespace com.cobalt910.core.Runtime.GUI
 
         public void RequestShowWindow(IWindowController controller)
         {
-            if (OpenedWindow != null && !OpenedWindow.View.IsOpened)
+            if (OpenedWindow != null && OpenedWindow.View.IsOpened)
             {
                 var currentPopup = OpenedWindow;
                 currentPopup.View.Close();
@@ -47,6 +46,7 @@ namespace com.cobalt910.core.Runtime.GUI
             _windowsMap.TryGetValue(controller.WindowId, out var view);
             if (view.IsNull()) throw new NullReferenceException("Can't find popup with id: " + controller.WindowId);
             
+            // ReSharper disable once PossibleNullReferenceException
             view.Controller = controller;
             controller.View = view;
 

@@ -3,6 +3,7 @@ using com.cobalt910.core.Runtime.Factory;
 using com.cobalt910.core.Runtime.Misc;
 using com.cobalt910.core.Runtime.ServiceLocator;
 using UnityEngine;
+using Zenject;
 using Random = UnityEngine.Random;
 
 namespace com.cobalt910.core.Samples.FactoryAndPoolSamples.Scripts
@@ -14,14 +15,9 @@ namespace com.cobalt910.core.Samples.FactoryAndPoolSamples.Scripts
         [SerializeField] private float _pushForce;
         [SerializeField] private float _rotationForce;
 
-        private IFactory<Shape, ShapeCreationArgs> _shapeFactory;
+        [Inject] private MonoFactory<ShapeCreationArgs, Shape> _shapeFactory;
         
         private float _timer;
-
-        private void Awake()
-        {
-            _shapeFactory = ServiceLocator.Resolve<IFactory<Shape, ShapeCreationArgs>>();
-        }
 
         private void Update()
         {

@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace com.cobalt910.core.Runtime.Localization
 {
-    public sealed class LocalizationManager : CachedBehaviour, IService
+    public sealed class LocalizationManager : CachedBehaviour, IMonoService
     {
         Type IService.ServiceType { get; } = typeof(LocalizationManager);
         

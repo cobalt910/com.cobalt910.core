@@ -1,6 +1,7 @@
 using com.cobalt910.core.Runtime.GUI;
 using com.cobalt910.core.Runtime.ServiceLocator;
 using com.cobalt910.core.Samples.GuiAndLocalizationSamples.Scripts.GUI.SecondWindow;
+using Zenject;
 
 namespace com.cobalt910.core.Samples.GuiAndLocalizationSamples.Scripts.GUI.InitialWindow
 {
@@ -14,12 +15,7 @@ namespace com.cobalt910.core.Samples.GuiAndLocalizationSamples.Scripts.GUI.Initi
         public WindowView View { get; set; }
         public int WindowId => (int) WindowType.Initial;
 
-        private WindowsManager _windowsManager;
-        
-        public InitialWindowController()
-        {
-            _windowsManager = ServiceLocator.Resolve<WindowsManager>();
-        }
+        [Inject] private WindowsManager _windowsManager;
 
         void IInitialWindowController.SecondButtonClicked()
         {

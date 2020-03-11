@@ -19,23 +19,23 @@ namespace com.cobalt910.core.Runtime.Observer
 
         public void SetChanged()
         {
-            _observers.ForEach(x => x.OnObjectChanged(this));
+            foreach (var observer in _observers)
+                observer.OnObjectChanged(this);
         }
 
         public void AddObserver(IObserver observable)
         {
-            var hash = observable.GetHashCode();
-            var index = _observers.FindIndex(x => x.GetHashCode().Equals(hash));
-            if (index == -1) _observers.Add(observable);
-            else Debug.LogError(observable.GetType().FullName + " subscribe duplication.");
+            if (_observers.Contains(observable))
+                throw new Exception(observable.GetType().FullName + " subscribe duplication.");
+            
+            _observers.Add(observable);
+            observable.OnObjectChanged(this);
         }
 
         public void RemoveObserver(IObserver observable)
         {
-            var hash = observable.GetHashCode();
-            var index = _observers.FindIndex(x => x.GetHashCode().Equals(hash));
-            if (index != -1) _observers.RemoveAt(index);
-            else Debug.LogError(observable.GetType().FullName + " already unsubscribed.");
+            if (_observers.Contains(observable)) _observers.Remove(observable);
+            else throw new Exception(observable.GetType().FullName + " already unsubscribed.");
         }
     }
     
@@ -53,27 +53,23 @@ namespace com.cobalt910.core.Runtime.Observer
 
         public void SetChanged()
         {
-            _observers.ForEach(x => x.OnObjectChanged((T) (object) this));
+            foreach (var observer in _observers)
+                observer.OnObjectChanged((T) (object) this);
         }
 
         public void AddObserver(IObserver<T> observable)
         {
-            var hash = observable.GetHashCode();
-            var index = _observers.FindIndex(x => x.GetHashCode().Equals(hash));
-            if (index == -1)
-            {
-                _observers.Add(observable);
-                observable.OnObjectChanged((T) (object) this);
-            }
-            else Debug.LogError(observable.GetType().FullName + " subscribe duplication.");
+            if (_observers.Contains(observable))
+                throw new Exception(observable.GetType().FullName + " subscribe duplication.");
+            
+            _observers.Add(observable);
+            observable.OnObjectChanged((T) (object) this);
         }
 
         public void RemoveObserver(IObserver<T> observable)
         {
-            var hash = observable.GetHashCode();
-            var index = _observers.FindIndex(x => x.GetHashCode().Equals(hash));
-            if (index != -1) _observers.RemoveAt(index);
-            else Debug.LogError(observable.GetType().FullName + " already unsubscribed.");
+            if (_observers.Contains(observable)) _observers.Remove(observable);
+            else throw new Exception(observable.GetType().FullName + " already unsubscribed.");
         }
     }
 
@@ -88,6 +84,7 @@ namespace com.cobalt910.core.Runtime.Observer
             {
                 if (!_value.Equals(value))
                     OnValueChanged?.Invoke(value);
+                
                 _value = value;
             }
         }

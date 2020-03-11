@@ -5,7 +5,7 @@ namespace com.cobalt910.core.Runtime.Observer
         void OnObjectChanged(IObservable observable);
     }
     
-    public interface IObserver<in T> //where T : IObservable<T>
+    public interface IObserver<in T>
     {
         void OnObjectChanged(T observable);
     }

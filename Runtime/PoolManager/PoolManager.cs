@@ -3,18 +3,21 @@ using System.Collections.Generic;
 using com.cobalt910.core.Runtime.Extension;
 using com.cobalt910.core.Runtime.Misc;
 using com.cobalt910.core.Runtime.ServiceLocator;
+using TMPro;
 using UnityEngine;
+using Zenject;
 
 namespace com.cobalt910.core.Runtime.PoolManager
 {
-    public sealed class PoolManager : CachedBehaviour, IService
+    public sealed class PoolManager : CachedBehaviour, IMonoService
     {
         Type IService.ServiceType => typeof(PoolManager);
         
         private readonly Dictionary<int, PoolQueue> _poolMap = new Dictionary<int, PoolQueue>();
+        [Inject] private DiContainer _diContainer;
 
         /// <summary>
-        /// Create pool using certain prefab.l
+        /// Create pool using certain prefab.
         /// </summary>
         /// <param name="prefab">Pool prefab.</param>
         /// <param name="startSize">Initial pool size.</param>
@@ -31,7 +34,7 @@ namespace com.cobalt910.core.Runtime.PoolManager
             if (_poolMap.ContainsKey(poolKey))
                 throw new Exception($"[PoolManager] Pool {prefab.name} already exist.");
 
-            var pool = new PoolQueue(prefab, startSize, increaseSizeBy, Transform.Value);
+            var pool = new PoolQueue(prefab, startSize, increaseSizeBy, Transform.Value, _diContainer);
             _poolMap.Add(poolKey, pool);
         }
 

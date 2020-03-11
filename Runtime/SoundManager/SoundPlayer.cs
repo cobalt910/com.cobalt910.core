@@ -2,6 +2,7 @@ using com.cobalt910.core.Runtime.Extension;
 using com.cobalt910.core.Runtime.Misc;
 using com.cobalt910.core.Runtime.PoolManager;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace com.cobalt910.core.Runtime.SoundManager
 {
@@ -42,6 +43,7 @@ namespace com.cobalt910.core.Runtime.SoundManager
 
             Play(settings);
             var targetVolume = _audioSource.volume;
+            
             Timer.Timer.Register(smoothTime, delegate { }, x =>
             {
                 var roundTime = x / smoothTime;
@@ -93,7 +95,7 @@ namespace com.cobalt910.core.Runtime.SoundManager
             var initialVolume = _audioSource.volume;
             Timer.Timer.Register(smoothTime, _poolObject.Destroy, x =>
             {
-                var roundTime = 1 - (x / smoothTime);
+                var roundTime = 1 - x / smoothTime;
                 roundTime = roundTime.Remap(0, 1, 0, initialVolume);
                 _audioSource.volume = roundTime;
             });

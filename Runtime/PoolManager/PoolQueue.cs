@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 using Object = UnityEngine.Object;
 
 namespace com.cobalt910.core.Runtime.PoolManager
@@ -15,8 +16,12 @@ namespace com.cobalt910.core.Runtime.PoolManager
         private readonly int _increaseSizeBy;
         private bool FlexibleSize => _increaseSizeBy > 0;
 
-        public PoolQueue(GameObject prefab, int startSize, int increaseSizeBy, Transform poolRoot)
+        private readonly DiContainer _diContainer;
+
+        public PoolQueue(GameObject prefab, int startSize, int increaseSizeBy, Transform poolRoot, DiContainer diContainer)
         {
+            _diContainer = diContainer;
+
             _prefab = prefab;
             _increaseSizeBy = increaseSizeBy;
 
@@ -75,7 +80,7 @@ namespace com.cobalt910.core.Runtime.PoolManager
 
         private PoolObject CreatePoolObject(GameObject prefab)
         {
-            var instance = Object.Instantiate(prefab, _poolParent);
+            var instance = _diContainer.InstantiatePrefab(prefab, _poolParent);
             instance.SetActive(false);
 
             return new PoolObject(instance, _poolParent);

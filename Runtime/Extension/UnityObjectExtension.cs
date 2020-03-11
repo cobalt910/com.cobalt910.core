@@ -18,5 +18,10 @@ namespace com.cobalt910.core.Runtime.Extension
         {
             return ReferenceEquals(o, obj);
         }
+
+        public static bool InstanceIdEquals(this Object o, Object obj)
+        {
+            return o.GetInstanceID() == obj.GetInstanceID();
+        }
     }
 }
