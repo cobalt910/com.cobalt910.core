@@ -82,10 +82,10 @@ namespace com.cobalt910.core.Runtime.Observer
             get => _value;
             set
             {
-                if (!_value.Equals(value))
-                    OnValueChanged?.Invoke(value);
-                
+                if (_value.Equals(value)) return;
+
                 _value = value;
+                OnValueChanged?.Invoke(value);
             }
         }
         
